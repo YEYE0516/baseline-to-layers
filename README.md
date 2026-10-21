@@ -6,7 +6,7 @@ An Agent Skill that derives a page's entire spatial system from one body type si
 
 名字就是整条线：**baseline**（正文行距定下的基线网格，一切纵向尺寸的基数）→ 空间系统 → **layers**（能被无损翻译成图层树的代码）。
 
-![57 行 → 55 行](57-to-55-lines.png)
+![baseline → layers 总览](01-pipeline.png)
 
 ## 覆盖范围
 
@@ -25,7 +25,29 @@ An Agent Skill that derives a page's entire spatial system from one body type si
 正文行距 L  →  字阶行距 = n × L  →  每格行数 r = floor((N − (k−1)×g) / k)  →  格高 r×L  →  版心高度
 ```
 
+### 版面层：字阶与基线
+
+字号可以自由，行距只能是 L 的倍数。这样任何样式叠起来，底边永远落在基线上。
+
+![字阶与行距倍率](02-type-scale.png)
+
+### 版面层：从行数算版心
+
 书里的原例：一栏 57 行，分 4 格 → 扣掉 3 个空行 → 54 ÷ 4 = 13.5 → 取 13 → **4×13+3 = 55 行**。版面高度是算出来的，不是先画框再塞字。
+
+![57 行 → 55 行](05-grid-calc.png)
+
+### 组件层：横向随 rem，纵向随 L
+
+padding / gap / 圆角按 rem 刻度取值，但纵向只允许 L 和 L/2 的倍数，容器总高必须是整数行。按钮这类小组件豁免。
+
+![组件间距](03-spacing.png)
+
+### 代码层：写法决定图层树
+
+flex + gap + 语义 class 的代码能被无损翻译成 Figma 图层；grid、margin、`.wrapper` 会变成垃圾层。
+
+![代码到图层](04-code-to-layers.png)
 
 三层之间的衔接规则（纵向只取 L 的倍数、横向随 rem 刻度、小组件豁免、项目固定尺寸优先、网格用 flex 表达）写在 `SKILL.md`。
 
@@ -45,9 +67,21 @@ git clone https://github.com/YEYE0516/baseline-to-layers .claude/skills/baseline
 
 从 [Releases](https://github.com/YEYE0516/baseline-to-layers/releases) 下载 zip，在 Settings → Capabilities → Skills 上传。
 
-### 其他支持 Agent Skills 标准的工具
+### Codex
 
-整个文件夹放进该工具的 skills 目录即可。
+```bash
+# 全局
+git clone https://github.com/YEYE0516/baseline-to-layers ~/.agents/skills/baseline-to-layers
+
+# 或放进项目
+git clone https://github.com/YEYE0516/baseline-to-layers .agents/skills/baseline-to-layers
+```
+
+也可以在 Codex 里用 `$skill-installer` 直接从这个仓库安装。
+
+### 其他支持 [Agent Skills](https://agentskills.io) 标准的工具
+
+整个文件夹放进该工具的 skills 目录即可，它只需要读 `SKILL.md`。不支持该标准的工具，可以把 `SKILL.md` 和分册内容贴进它的规则文件（AGENTS.md 等），只是会失去按需读分册的渐进加载。
 
 ## 项目级配置（可选）
 
@@ -80,8 +114,11 @@ baseline-to-layers/
 ├── figma-export-checklist.md   ← 代码层·导出期
 ├── README.md
 ├── LICENSE
-├── 57-to-55-lines.png
-└── 57-to-55-lines.svg
+├── 01-pipeline.png             ← 总览
+├── 02-type-scale.png           ← 字阶与基线
+├── 03-spacing.png              ← 组件间距
+├── 04-code-to-layers.png       ← 代码到图层
+└── 05-grid-calc.png            ← 57 行 → 55 行算例
 ```
 
 ## 参考
