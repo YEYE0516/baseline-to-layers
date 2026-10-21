@@ -6,7 +6,7 @@ An Agent Skill that derives a page's entire spatial system from one body type si
 
 名字就是整条线：**baseline**（正文行距定下的基线网格，一切纵向尺寸的基数）→ 空间系统 → **layers**（能被无损翻译成图层树的代码）。
 
-![57 行 → 55 行](examples/57-to-55-lines.png)
+![57 行 → 55 行](57-to-55-lines.png)
 
 ## 覆盖范围
 
@@ -35,15 +35,15 @@ An Agent Skill that derives a page's entire spatial system from one body type si
 
 ```bash
 # 个人（所有项目可用）
-git clone https://github.com/YOUR_USERNAME/baseline-to-layers ~/.claude/skills/baseline-to-layers
+git clone https://github.com/YEYE0516/baseline-to-layers ~/.claude/skills/baseline-to-layers
 
 # 或放进某个项目（随仓库提交，团队共享）
-git clone https://github.com/YOUR_USERNAME/baseline-to-layers .claude/skills/baseline-to-layers
+git clone https://github.com/YEYE0516/baseline-to-layers .claude/skills/baseline-to-layers
 ```
 
 ### claude.ai / Cowork
 
-从 [Releases](https://github.com/YOUR_USERNAME/baseline-to-layers/releases) 下载 zip，在 Settings → Capabilities → Skills 上传。
+从 [Releases](https://github.com/YEYE0516/baseline-to-layers/releases) 下载 zip，在 Settings → Capabilities → Skills 上传。
 
 ### 其他支持 Agent Skills 标准的工具
 
@@ -80,9 +80,8 @@ baseline-to-layers/
 ├── figma-export-checklist.md   ← 代码层·导出期
 ├── README.md
 ├── LICENSE
-└── examples/
-    ├── 57-to-55-lines.png
-    └── 57-to-55-lines.svg
+├── 57-to-55-lines.png
+└── 57-to-55-lines.svg
 ```
 
 ## 参考
